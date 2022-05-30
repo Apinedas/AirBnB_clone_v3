@@ -2,7 +2,7 @@
 """First blueprint for HBNB Project"""
 
 from api.v1.views import app_views
-from flask import Flask
+from flask import Flask, jsonify
 from models import storage
 import os
 
@@ -14,6 +14,11 @@ app.register_blueprint(app_views)
 @app.teardown_appcontext
 def teardown_close(self):
     storage.close()
+
+
+@app.errorhandler(404)
+def page_not_found(error):
+    return jsonify(error='Not found')
 
 
 if __name__ == "__main__":
