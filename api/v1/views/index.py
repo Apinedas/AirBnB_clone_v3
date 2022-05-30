@@ -17,10 +17,13 @@ from models.user import User
 def ret_status():
     return(jsonify(status="OK"))
 
+
 @app_views.route('/stats', strict_slashes=False)
 def count_clases():
-    classes = [Amenity, City, Place, Review, State, User]
+    classes = {"amenities": Amenity, "cities": City,
+               "places": Place, "reviews": Review,
+               "states": State, "users": User}
     ret_dict = dict()
-    for cls in classes:
-        ret_dict[cls.__name__] = storage.count(cls)
+    for name, cls in classes.items():
+        ret_dict[name] = storage.count(cls)
     return(jsonify(ret_dict))
