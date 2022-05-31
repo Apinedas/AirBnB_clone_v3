@@ -40,9 +40,9 @@ def create_amenity():
         abort(400, 'Not a JSON')
     if 'name' not in new_amenity_dict.keys():
         abort(400, 'Missing name')
-    new_state = Amenity(**new_amenity_dict)
-    new_state.save()
-    return jsonify(new_state.to_dict()), 201
+    new_amenity = Amenity(**new_amenity_dict)
+    new_amenity.save()
+    return jsonify(new_amenity.to_dict()), 201
 
 
 @app_views.route('/amenities/<amnt_id>', methods=['PUT'], strict_slashes=False)
