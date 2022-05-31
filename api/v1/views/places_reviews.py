@@ -5,7 +5,6 @@
 from api.v1.views import app_views
 from flask import jsonify, abort, request, make_response
 from models import storage
-from models.city import City
 from models.place import Place
 from models.user import User
 from models.review import Review
@@ -61,7 +60,7 @@ def create_review(place_id):
         abort(400, 'Missing text')
 
     new_review = Review(**review_dict)
-    setattr(new_review, 'user_id', valid_user)
+    setattr(new_review, 'place_id', place_id)
     new_review.save()
     return jsonify(new_review.to_dict()), 201
 
