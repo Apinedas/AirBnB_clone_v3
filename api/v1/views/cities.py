@@ -24,7 +24,6 @@ def cities_by_state(st_id):
 @app_views.route('/cities/<city_id>', methods=['GET'], strict_slashes=False)
 def city_by_id(city_id):
     city = storage.get(City, city_id)
-    print(city)
     if city:
         return jsonify(city.to_dict())
     abort(404)
