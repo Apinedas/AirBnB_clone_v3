@@ -11,7 +11,7 @@ from models.amenity import Amenity
 @app_views.route('/amenities', methods=['GET'], strict_slashes=False)
 def amenities():
     amenties = [amenity.to_dict() for amenity in storage.all(Amenity).values()]
-    return amenties
+    return jsonify(amenties)
 
 
 @app_views.route('/amenities/<amnt_id>', methods=['GET'], strict_slashes=False)
@@ -61,4 +61,4 @@ def update_amenity_by_id(amnt_id):
         else:
             setattr(amenity, key, value)
     storage.save()
-    return make_response(jsonify(amenity.to_dict()), 200)
+    return jsonify(amenity.to_dict()), 200
