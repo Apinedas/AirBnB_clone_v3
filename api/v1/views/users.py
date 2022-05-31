@@ -14,7 +14,7 @@ def retrieve_users():
     return jsonify(users)
 
 
-@app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/users/<usr_id>', methods=['GET'], strict_slashes=False)
 def user_by_id(usr_id):
     user = storage.get(User, usr_id)
     if user:
@@ -47,8 +47,8 @@ def create_user():
 
 
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
-def update_user_by_id(amnt_id):
-    user = storage.get(user, amnt_id)
+def update_user_by_id(usr_id):
+    user = storage.get(User, usr_id)
     if not user:
         abort(404)
 
